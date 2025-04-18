@@ -78,6 +78,21 @@ tasks:
               ignore_unknown_values = TRUE
       );
 
+
+#Task to run dbt build at dbt Cloud for updating the BigQuery dataset with transformed data.
+  - id: trigger_dbt_build
+    type: io.kestra.plugin.core.http.Request
+    uri: "https://ol658.us1.dbt.com/api/v2/accounts/{{ secret('DBT_ACCOUNT_ID') }}/jobs/{{ secret('DBT_JOB_ID') }}/run/"
+    method: POST
+    contentType: application/json
+    headers:
+      Authorization: "Token {{ secret('DBT_CLOUD_API_TOKEN') }}"
+    body: |
+      {
+        "cause": "Triggered via API"
+      }
+
+
 # To avoid repeating task properties on multiple occurrences of the same task in a pluginDefaults properties
 pluginDefaults:
  - type: io.kestra.plugin.gcp
@@ -87,13 +102,16 @@ pluginDefaults:
       location: "{{secret('GCP_LOCATION')}}"
       bucket: "{{secret('GCP_BUCKET_NAME')}}"
       dataset: "{{secret('GCP_DATASET')}}"
+      dbtAPItoken: "{{secret('DBT_CLOUD_API_TOKEN')}}"
+      dbtAccountID: "{{secret('DBT_ACCOUNT_ID')}}"
+      dbtJobID: "{{secret('DBT_JOB_ID')}}"
 
 variables:
   file: "latest_measurements_{{ outputs.extract_timestamp_from_logs.vars.timestamp}}.csv"
   gcs_file: "gs://{{secret('GCP_BUCKET_NAME')}}/hourly_data/{{vars.file}}"
   table: "{{secret('GCP_DATASET')}}.ext_hourly_source_data"  
 
-# Trigger scheduled for running this flow every hour at the 40th minute. (but since GCP platform and VM in us-central-1 location, where Kestra is hosted, it is 10th minute as per Indian Standard Time because of thee time difference )
+# Trigger scheduled for running this flow every hour at the 40th minute.
 triggers:
   - id: hourly
     type: io.kestra.plugin.core.trigger.Schedule
