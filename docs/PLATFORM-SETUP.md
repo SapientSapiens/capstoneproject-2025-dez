@@ -4,7 +4,7 @@
 
  2. From the Project Selector in your GCP account, you shall get the Create Projct button which you need to click.
 
-  ![alt text](images/setup/image.png)
+  ![alt text](..images/setup/image.png)
 
  3. You shall land in the Project Creation Page where you need to input a Project Name and create the project. I put  __dez-capstone-project1__ as the project name.
 
