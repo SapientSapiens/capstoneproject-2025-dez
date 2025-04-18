@@ -78,7 +78,7 @@ To address this gap, I designed and implemented a state-specific, smart air qual
 
  ### Architecture and interplay of these components for running the pipeline with batch-porcessing ###
 
-                ----------------architecutre image to go here -----------------------------
+   ![alt text](images/dez-proj-architecture.drawio.png)
 
 
  ### Project Structure ###
@@ -155,4 +155,5 @@ To address this gap, I designed and implemented a state-specific, smart air qual
 
     ![alt text](images/dashboard-1.png)     
 
+    The dashboard can be acccesed [here](https://lookerstudio.google.com/reporting/906f6c45-bee4-44a1-91ef-b5c25172b12e/page/mxTHF)
 
