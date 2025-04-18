@@ -1,9 +1,7 @@
 version: 2
 
 seeds: 
-  - name: taxi_zone_lookup
+  - name: air_quality_location_lookup
     description: >
-      Taxi Zones roughly based on NYC Department of City Planning's Neighborhood
-      Tabulation Areas (NTAs) and are meant to approximate neighborhoods, so you can see which
-      neighborhood a passenger was picked up in, and which neighborhood they were dropped off in. 
-      Includes associated service_zone (EWR, Boro Zone, Yellow Zone)
+      Each location is basically a city which have stations that house the air quality
+      sensors. The stations location information is also with latitude and longitude.

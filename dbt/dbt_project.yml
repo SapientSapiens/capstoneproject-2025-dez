@@ -43,10 +43,11 @@ models:
       core:
           materialized: table
 vars:
-  payment_type_values: [1, 2, 3, 4, 5, 6]
+  aqi_type_values: [1, 2, 3, 4, 5, 6]
+  is_test_run: false  # Default value
 
 seeds: 
     air_quality_analytics:
-           taxi_zone_lookup:
+           air_quality_location:
                  +column_types:
-                    locationid: numeric
+                    location_id: string

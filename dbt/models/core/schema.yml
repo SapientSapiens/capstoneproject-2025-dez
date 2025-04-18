@@ -1,129 +1,77 @@
 version: 2
 
 models:
-  - name: dim_zones
+  - name: fct_current_hourly
     description: >
-      List of unique zones idefied by locationid. 
-      Includes the service zone they correspond to (Green or yellow).
+      Table for the Visualisation tool to pick up from data from for the current air quality data 
+      comprising of concentrations in (µg/m³) of different pollutants for a particular location.
+      Excludes temperature and humidity readings.
+    tests:
+     - dbt_utils.unique_combination_of_columns:
+        combination_of_columns:
+          - location_id
+          - dateandtime
+          - sensor_id
+        severity: error
 
-  - name: dm_monthly_zone_revenue
+  - name: sensor_name
+    description: Name of the pollutant being measured (e.g., CO, NO2)
+    tests:
+      - accepted_values:
+          values: ['CO', 'NO', 'NO2', 'SO2', 'O3', 'PM2.5', 'PM25', 'PM10'] # PM2.5 is coming as PM25 sometimes from source
+          severity: warn
+  
+
+  - name: dim_cumulative_hourly
     description: >
-      Aggregated table of all taxi trips corresponding to both service zones (Green and yellow) per pickup zone, month and service.
-      The table contains monthly sums of the fare elements used to calculate the monthly revenue. 
-      The table contains also monthly indicators like number of trips, and average trip distance. 
+      Cumulative records of raw hourly measurements. Used for 
+      longitudinal accumulation of hourly data. and downstream processing.
     columns:
-      - name: revenue_monthly_total_amount
-        description: Monthly sum of the the total_amount of the fare charged for the trip per pickup zone, month and service.
+      - name: unique_record_id
+        description: MD5 hash of location_id+dateandtime+sensor_id
         tests:
-            - not_null:
-                severity: error
-      
-  - name: fact_trips
-    description: >
-      Taxi trips corresponding to both service zones (Green and yellow).
-      The table contains records where both pickup and dropoff locations are valid and known zones. 
-      Each record corresponds to a trip uniquely identified by tripid. 
+          - not_null
+          - unique:
+              severity: error  # if duplicates somehow appear
+
+      - name: sensor_name
+        tests:
+          - accepted_values:
+              values: ['CO', 'NO', 'NO2', 'SO2', 'O3', 'PM2.5', 'PM25', 'PM10'] # PM2.5 is coming as PM25 sometimes from source
+
+  - name: dim_whole_data
+    description: Unified view of historical and cumulative air quality data
     columns:
-      - name: tripid
-        data_type: string
-        description: "unique identifier conformed by the combination of vendorid and pickup time"
+      - name: unique_record_id
+        tests:
+          - not_null
+          - unique:
+              severity: error  # if duplicates somehow appear
+      - name: sensor_name
+        tests:
+          - accepted_values:
+             values: ['CO', 'NO', 'NO2', 'SO2', 'O3', 'PM2.5', 'PM25', 'PM10'] # PM2.5 is coming as PM25 sometimes from source
 
-      - name: vendorid
-        data_type: int64
-        description: ""
 
-      - name: service_type
-        data_type: string
-        description: ""
+  - name: fct_AQI_data
+    description: Calculated AQI values per location-day
+    columns:
+     - name: aqi
+       tests:
+        - not_null
+        - accepted_values:
+            values: [1, 2, 3, 4, 5, 6]
+     - name: aqi_description
+       tests:
+        - accepted_values:
+            values: ['Good', 'Satisfactory', 'Moderate', 'Poor', 'Very Poor', 'Severe']
 
-      - name: ratecodeid
-        data_type: int64
-        description: ""
 
-      - name: pickup_locationid
-        data_type: int64
-        description: ""
-
-      - name: pickup_borough
-        data_type: string
-        description: ""
-
-      - name: pickup_zone
-        data_type: string
-        description: ""
-
-      - name: dropoff_locationid
-        data_type: int64
-        description: ""
-
-      - name: dropoff_borough
-        data_type: string
-        description: ""
-
-      - name: dropoff_zone
-        data_type: string
-        description: ""
-
-      - name: pickup_datetime
-        data_type: timestamp
-        description: ""
-
-      - name: dropoff_datetime
-        data_type: timestamp
-        description: ""
-
-      - name: store_and_fwd_flag
-        data_type: string
-        description: ""
-
-      - name: passenger_count
-        data_type: int64
-        description: ""
-
-      - name: trip_distance
-        data_type: numeric
-        description: ""
-
-      - name: trip_type
-        data_type: int64
-        description: ""
-
-      - name: fare_amount
-        data_type: numeric
-        description: ""
-
-      - name: extra
-        data_type: numeric
-        description: ""
-
-      - name: mta_tax
-        data_type: numeric
-        description: ""
-
-      - name: tip_amount
-        data_type: numeric
-        description: ""
-
-      - name: tolls_amount
-        data_type: numeric
-        description: ""
-
-      - name: ehail_fee
-        data_type: numeric
-        description: ""
-
-      - name: improvement_surcharge
-        data_type: numeric
-        description: ""
-
-      - name: total_amount
-        data_type: numeric
-        description: ""
-
-      - name: payment_type
-        data_type: int64
-        description: ""
-
-      - name: payment_type_description
-        data_type: string
-        description: ""
+  - name: fct_temporal_location
+    description: "Daily pollutant concentration per sensor and location"
+    columns:
+      - name: unique_record_id
+        tests:
+          - unique:
+             severity: error  # if duplicates somehow appear
+          - not_null

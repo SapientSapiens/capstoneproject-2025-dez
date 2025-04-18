@@ -22,6 +22,4 @@
       );
 
 
- TRUNCATE TABLE `dez-capstone-project1.air_quality_assam_dataset.stg_hourly_source_data`
-
- INSERT INTO `dez-capstone-project1.air_quality_assam_dataset.stg_hourly_source_data`......
+  -- AND DO --->> dbt build --full-refresh

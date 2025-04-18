@@ -1,4 +1,4 @@
-location_id,station_name,latitude,longitude,location_name
+location_id,location_name,latitude,longitude,city_name
 3409376,"Central Academy for SFS, Byrnihat - PCBA-3379798",26.071318,91.87488,Byrnihat
 3409391,"Tarapur, Silchar - PCBA-3379813",24.82827,92.79525,Silchar
 10903,"Railway Colony, Guwahati - APCB-3379594",26.181742,91.78063,Guwahati

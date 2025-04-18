@@ -1,12 +1,26 @@
 version: 2
 
 macros:
-  - name: get_payment_type_description
+  - name: get_aqi_type_description
     description: >
-      This macro receives a payment_type and returns the corresponding description.
+      This macro receives a aqi_type number/value and returns the corresponding description.
     arguments:
-      - name: payment_type
+      - name: aqi_type 
         type: int
         description: > 
-          payment_type value.
+          aqi_type value.
           Must be one of the accepted values, otherwise the macro will return null
+  - name: get_pollutant_subindex
+    description: >
+      This macro receives a pollutant type and its concentration value and returns the sub-index of the pollutant.
+    arguments:
+      - name: pollutant
+        type: string
+        description: > 
+          pollutant type.
+          Must be one of the accepted values, otherwise the macro will return null     
+      - name: concetration
+        type: float64
+        description: > 
+          pollutant concentration value.
+          Must be one of the accepted values, otherwise the macro will return null     
