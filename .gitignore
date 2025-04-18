@@ -7,4 +7,5 @@
 **/*$py.class
 # ignore duckdb
 *.duckdb
-*.wal
+*.wal.terraform/
+.terraform/
