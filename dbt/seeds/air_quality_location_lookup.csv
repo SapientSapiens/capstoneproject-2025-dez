@@ -1,4 +1,12 @@
+<<<<<<< HEAD
+<<<<<<< HEAD
+location_id,location_name,latitude,longitude,city_name
+=======
 location_id,station_name,latitude,longitude,location_name
+>>>>>>> 4948e0703efb0e1648a247fcee68ab627491384d
+=======
+location_id,station_name,latitude,longitude,location_name
+>>>>>>> 98000dc61f9252953232363e34adfed4cd0ac03f
 3409376,"Central Academy for SFS, Byrnihat - PCBA-3379798",26.071318,91.87488,Byrnihat
 3409391,"Tarapur, Silchar - PCBA-3379813",24.82827,92.79525,Silchar
 10903,"Railway Colony, Guwahati - APCB-3379594",26.181742,91.78063,Guwahati
@@ -7,4 +15,12 @@ location_id,station_name,latitude,longitude,location_name
 363601,"Girls College, Sivasagar - PCBA-3379788",26.987634,94.636574,Sivasagar
 42240,"Pan Bazaar, Guwahati - APCB-3379681",26.1875,91.744194,Guwahati
 3409360,"IITG, Guwahati - PCBA-3379783",26.2028636,91.70046436,Guwahati
+<<<<<<< HEAD
+<<<<<<< HEAD
 3409375,"Bata Chowk, Nalbari - PCBA-3379797",26.446912,91.439057,Nalbari
+=======
+3409375,"Bata Chowk, Nalbari - PCBA-3379797",26.446912,91.439057,Nalbari
+>>>>>>> 4948e0703efb0e1648a247fcee68ab627491384d
+=======
+3409375,"Bata Chowk, Nalbari - PCBA-3379797",26.446912,91.439057,Nalbari
+>>>>>>> 98000dc61f9252953232363e34adfed4cd0ac03f

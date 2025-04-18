@@ -40,5 +40,5 @@ SELECT
     sensor_name,
     location_id,
     location_name,
-    avg_concentration
+    ROUND(avg_concentration, 3) AS avg_concentration
 FROM cte_daily_location_pollutants
