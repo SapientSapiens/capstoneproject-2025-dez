@@ -85,6 +85,6 @@ To address this gap, I designed and implemented a state-specific, smart air qual
 
   - The from my local machine I used, Terraform as the IaC tool to create resources at the Google Cloud Platform. Apart from mandatory associated firewall rules and API enablement, etc. Terraform created : the compute engine VM, the BigQuery dataset and the GCS bucket.
 
-  - The VM was then set up for the project.
+  - The VM was then set up for the project. The entire project is  developed on that VM. 
 
   - All details regarding this can be found  👉  [here](/docs/PLATFORM-SETUP.md) 
