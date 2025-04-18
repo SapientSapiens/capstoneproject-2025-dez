@@ -72,11 +72,24 @@ To address this gap, I designed and implemented a state-specific, smart air qual
  - dbt Cloud as the cloud based data transformation tool
 
  - Google Looker Studio ads the visualizaation tool.
+ 
+ - dlt frrom dltHub which is a data loading tool
 
 
- ### Architechure and interplay of these components for running the pipeline with batch-porcessing ###
+ ### Architecture and interplay of these components for running the pipeline with batch-porcessing ###
 
                 ----------------architecutre image to go here -----------------------------
+
+
+ ### Project Structure ###
+
+        
+   
+
+   |                                            |                                            |
+   |--------------------------------------------|--------------------------------------------|
+   |![alt text](images/proj-struct.png)         | ![alt text](images/struct-pr.png)      |
+
 
 
 ## ☁️ Cloud and Terraform ##
@@ -92,8 +105,22 @@ To address this gap, I designed and implemented a state-specific, smart air qual
 
 ##  🕒 [⚙️]→[⚙️] Workflow Orchestraion and Batch Proceessing  ##
 
-  - End to end batch processed pipeline from data extraction from OpenAQ sources to data transformation in BigQuery with dbt Cloud.
+  - End to end batch processed pipeline from data extraction from OpenAQ sources to data transformation in BigQuery with dbt Cloud. The following is a Direct Acyclic Graph (DAG) of the hourly work flow runnig at Kestra.
+
 
     ![alt text](/images/kestra-DAG.png)
 
+
   - All details regarding setting up and operationalization of the orchestration tool can be found  👉  [here](/docs/PROJECT-SETUP-VM-Kestra.md) 
+
+
+##  ![alt text](images/%20bq.png) Use of Data Warehouse with table partitioning and clustering ## 
+
+  - Google BigQuery is used as the data warehouse for my project
+
+  - Tables with growth to large cardinality and currently with rows more than 10k have been partined and clustered. The scripts for creating tables with partitioning and clustering are to be found in the [dbt models](/dbt/models/core/).`
+ 
+
+    |                                            |                                            |
+    |--------------------------------------------|--------------------------------------------|
+    | ![alt text](/images/partitioned-1.png)     | ![alt text](images/partitioned-2.png)      |
