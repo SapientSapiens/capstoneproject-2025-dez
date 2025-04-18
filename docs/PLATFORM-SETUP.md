@@ -97,7 +97,7 @@
 
    ![alt text](../images/setup/image-13.png)
 
- 11. Now let us check the ceeated resources
+ 11. Now let us check the created resources
   
    |                                            |                                            |
    |--------------------------------------------|--------------------------------------------|
@@ -111,9 +111,9 @@
 
 
 
-   |                                         |                                         |
-   |-----------------------------------------|-----------------------------------------|
-   | ![alt text](images/setup/image-18.png)  | ![alt text](images/setup/image-17.png)  |
+   |                                         |                                               |
+   |-----------------------------------------|-----------------------------------------------|
+   | ![alt text](../images/setup/image-18.png)  | ![alt text](../images/setup/image-17.png)  |
 
 
 ## Readying the VM created with Terraform for use in the Project ##
