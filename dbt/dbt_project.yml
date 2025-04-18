@@ -2,7 +2,7 @@
 # Name your project! Project names should contain only lowercase characters
 # and underscores. A good package name should reflect your organization's
 # name or the intended use of these models
-name: 'taxi_rides_ny'
+name: 'air_quality_analytics'
 version: '1.0.0'
 config-version: 2
 
@@ -36,17 +36,18 @@ clean-targets:         # directories to be removed by `dbt clean`
 # using the `{{ config(...) }}` macro.
 
 models:
-  taxi_rides_ny:
+  air_quality_analytics:
       # Applies to all files under models/.../
       staging:
           materialized: view
       core:
           materialized: table
 vars:
-  payment_type_values: [1, 2, 3, 4, 5, 6]
+  aqi_type_values: [1, 2, 3, 4, 5, 6]
+  is_test_run: false  # Default value
 
 seeds: 
-    taxi_rides_ny:
-        taxi_zone_lookup:
-            +column_types:
-                locationid: numeric
+    air_quality_analytics:
+           air_quality_location:
+                 +column_types:
+                    location_id: string
