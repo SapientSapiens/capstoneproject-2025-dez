@@ -47,10 +47,44 @@ To address this gap, I designed and implemented a state-specific, smart air qual
 
  __🔹4. Automation and orchestration__
 
-   These activities right from data ingestion to loading to storage and transformation are fully automated and each activity executes in sequential sync with the next in a seamlessly orchestrated way. An orchestration tool handles this right from loading data into datalake, getting and storing it into the datawarehouse and transformaing it to be analytics ready.
+   These activities right from data ingestion to loading to storage and transformation are fully automated and each activity executes in sequential sync with the next in a seamlessly orchestrated way. An orchestration tool handled this right from loading data into datalake, getting and storing it into the datawarehouse and transformaing it to be analytics ready.
 
  __🔹4. Visualization__
 
-    So fianlly with the cleaned and curated data, became ready for gettign visual insights out of them that reveal trends and patterns not very forthcoming in tabulat data. A visualization tool automacilly picks up the data in  the datawarehouse and responds to changes in the same through charts and other visual widgets.
+   So fianlly with the cleaned and curated data, became ready for gettign visual insights out of them that reveal trends and patterns not very forthcoming in tabulat data. The visualization tool automatically picked up the data in the datawarehouse and responds to changes in the data through charts and other visual widgets.
 
-    
+
+
+## ⚙️🔧 Technical Overview ##
+
+ ### Technology Stack I have used ###
+
+ - Google Cloud Platform as the main cloud platform
+
+ - Google Cloud Storage Bucket as the data lake
+
+ - Google BigQuery as the data warehouse
+
+ - Terraform as Infrastructure as Code (IaC) tool.
+
+ - Kestra as the orchestratool tool
+
+ - dbt Cloud as the cloud based data transformation tool
+
+ - Google Looker Studio ads the visualizaation tool.
+
+
+ ### Architechure and interplay of these components for running the pipeline with batch-porcessing ###
+
+                ----------------architecutre image to go here -----------------------------
+
+
+## ☁️ Cloud and Terraform ##
+
+  - After getting my GCP account, I had created the Project and the Serive account for this project. 
+
+  - The from my local machine I used, Terraform as the IaC tool to create resources at the Google Cloud Platform. Apart from mandatory associated firewall rules and API enablement, etc. Terraform created : the compute engine VM, the BigQuery dataset and the GCS bucket.
+
+  - The VM was then set up for the project.
+
+  - All details regarding this can be found  👉  [here](/docs/PLATFORM-SETUP.md) 
