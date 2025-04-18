@@ -9,3 +9,4 @@
 *.duckdb
 *.wal.terraform/
 .terraform/
+.secrets/
