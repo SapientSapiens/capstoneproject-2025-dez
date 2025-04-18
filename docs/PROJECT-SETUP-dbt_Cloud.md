@@ -37,4 +37,4 @@
 
     |                                                  |                                                 |
     |--------------------------------------------------|-------------------------------------------------|
-    | ![alt text](/images/project-setup/image-i1.png)  | ![alt text](/images/project-setup/image-i2.png) |
+    | ![alt text](/images/project-setup/image-i11.png)  | ![alt text](/images/project-setup/image-i2.png) |
