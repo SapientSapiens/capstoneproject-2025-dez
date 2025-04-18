@@ -77,3 +77,11 @@
    |                                                         |                                                         |
    |---------------------------------------------------------|---------------------------------------------------------|
    | ![alt text](/images/project-setup/history-bucket.png)   | ![alt text](/images/project-setup/history-dataset.png)  |
+
+
+
+ 12. The final part or task of the scheduled flow, i.e.,  __hourly_air_quality__  is to run the data transformation in the BigQuery dataset with dbt Cloud via the API trigger. The flow is executing sucessfully.
+
+
+  
+   ![alt text](/images/project-setup/gantt-api-dbt.png)

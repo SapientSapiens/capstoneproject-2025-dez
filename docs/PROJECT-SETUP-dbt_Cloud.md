@@ -57,6 +57,11 @@
     |                                                        |                                                                        |
     |--------------------------------------------------------|------------------------------------------------------------------------|
     | ![alt text](/images/project-setup/dbt-prod-build.png)  | ![alt text](/images/project-setup/prod-dataset-dbt-populate.png)       |
+
+
+ 7. Since we have this data transformation through _dbt build_ as a part of the data pipeline, we need to integrate a API trigger from the orchestration tool (Kestra) to dbt Cloud for running the job __kestra_trigger_job__ . We need to get a service token from dbt Cloud as the API key for that trigger to be used by the orchestration tool. Please cross reference with [__this__](/docs/PROJECT-SETUP-VM-Kestra.md) . After setting up the trigger in the orcehstrration tool (kestra), when the flow is executed, we can see the job is running triggered via the API from one of the tasks in the orchestration flow.
+
+  ![alt text](/images/project-setup/dbt-build-API-triggered.jpg)
   
    
   
