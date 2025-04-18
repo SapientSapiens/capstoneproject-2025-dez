@@ -3,7 +3,7 @@ version: 2
 sources:
   - name: staging
     database: "{{ env_var('DBT_DATABASE', 'dez-capstone-project1') }}"
-    schema: "{{ env_var('DBT_SCHEMA', 'air_quality_assam_dataset') }}"
+    schema: "{{ env_var('DBT_SCHEMA', 'prod_air_quality_assam_dataset') }}"
     tables:
       - name: ext_historical_source_data
       - name: ext_hourly_source_data

@@ -111,7 +111,7 @@ To address this gap, I designed and implemented a state-specific, smart air qual
     ![alt text](/images/kestra-DAG.png)
 
 
-  - All details regarding setting up and operationalization of the orchestration tool can be found  👉  [here](/docs/PROJECT-SETUP-VM-Kestra.md) 
+  - All details regarding setting up and operationalization of the orchestration tool Kestra can be found  👉  [here](/docs/PROJECT-SETUP-VM-Kestra.md) 
 
 
 ##  ![alt text](images/%20bq.png) Use of Data Warehouse with table partitioning and clustering ## 
@@ -124,3 +124,21 @@ To address this gap, I designed and implemented a state-specific, smart air qual
     |                                            |                                            |
     |--------------------------------------------|--------------------------------------------|
     | ![alt text](/images/partitioned-1.png)     | ![alt text](images/partitioned-2.png)      |
+
+
+## ![alt text](images/dbt.png) Data transformation with dbt ## 
+
+  - I have used dbt Cloud for the trasformation part of the pipeline. dbt Cloud connets to my BigQuery dataset and executes the transformations seamlessly. 
+
+  -  All details regarding setting up and operationalization of the data transformation tool dbt Cloud can be found  👉  [here](/docs/PROJECT-SETUP-dbt_Cloud.md) 
+
+  - Further, these dbt Cloud operations (defined in a job) are also integrated with the orchestrration tool which triggers the dbt build after each hourly successfull load of data from the GCS bucket to BigQuery dataset through an external table. The flow can be found [here](/orchestration/flows/dez.capstone_hourly_air_quality.yml)
+
+  - Till now (at the time of writing this document), the API triggered dbt build has been going on at the Production environment at dbt Cloud flawlessly and consequent BigQuery dataset data also being transformed successfully.
+
+ 
+   |                                                |                                            |
+   |------------------------------------------------|--------------------------------------------|
+   |  ![alt text](images/api-trigger-success.png)   | ![alt text](images/asli-DAG.png)           |
+
+
