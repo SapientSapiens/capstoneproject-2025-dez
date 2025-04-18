@@ -88,3 +88,12 @@ To address this gap, I designed and implemented a state-specific, smart air qual
   - The VM was then set up for the project. The entire project is  developed on that VM. 
 
   - All details regarding this can be found  👉  [here](/docs/PLATFORM-SETUP.md) 
+
+
+##  🕒 [⚙️]→[⚙️] Workflow Orchestraion and Batch Proceessing  ##
+
+  - End to end batch processed pipeline from data extraction from OpenAQ sources to data transformation in BigQuery with dbt Cloud.
+
+    ![alt text](/images/kestra-DAG.png)
+
+  - All details regarding setting up and operationalization of the orchestration tool can be found  👉  [here](/docs/PROJECT-SETUP-VM-Kestra.md) 
