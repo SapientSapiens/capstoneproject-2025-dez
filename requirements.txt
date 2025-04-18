@@ -1,0 +1,7 @@
+dlt[filesystem]==1.8.1
+boto3==1.37.1
+s3fs==2025.3.2
+fsspec==2025.3.2
+gcsfs==2025.3.2  # Only include if you need Google Cloud Storage
+kestra
+google-cloud-storage

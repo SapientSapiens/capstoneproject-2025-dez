@@ -1,0 +1,73 @@
+id: historical_air_quality
+namespace: dez.capstone
+
+inputs:
+  - id: year
+    type: SELECT
+    displayName: Select from which year you want the historical air quality data for your concerned loactions.
+    values: ["2019", "2020", "2021", "2022", "2023", "2024", "2025"]
+    defaults: "2025" # since sensors for 6 out of the 9 locations have been installed only on  February 2025. So for compparison we have to have 2025 as the year.
+    allowCustomValue: false # not needed currently
+
+# This task gets the required access to the needed files under scriots directory of my project directory
+tasks:
+  - id: kestra_namespace_files_sync
+    type: io.kestra.plugin.scripts.shell.Commands
+    taskRunner:
+      type: io.kestra.plugin.core.runner.Process
+    commands:
+      - /app/kestra namespace files update dez.capstone /app/scripts . --server=http://localhost:8080 --user=admin@kestra.io:{{secret('KESTRA_PASSWORD')}}
+     
+
+  # This task runs the dlt pipeline to fetch air-quality data for the desired locations and dumps in a file to a GCS bucket.  
+  - id: backfill_historical_data
+    type: io.kestra.plugin.scripts.python.Commands
+    containerImage: python:3.12-slim
+    env:
+      # Inject the GCS credentials to the container environment.
+      GOOGLE_APPLICATION_CREDENTIALS: "{{secret('GCP_SERVICE_ACCOUNT')}}"
+    namespaceFiles:
+      enabled: true
+    beforeCommands:
+      - pip install boto3==1.37.1 google-cloud-storage kestra
+    commands:
+      - python historical_readings_ingestion.py --year {{ inputs.year }}
+
+    # Task to create BigQuery external table for loading data
+  - id: bq_historical_table_ext
+    type: io.kestra.plugin.gcp.bigquery.Query
+    sql: |
+      CREATE OR REPLACE EXTERNAL TABLE `{{secret('GCP_PROJECT_ID')}}.{{render(vars.table)}}`
+      (
+          location_id   STRING,
+          sensor_id     STRING,
+          location_name STRING,
+          dateandtime   STRING,
+          latitude      FLOAT64,
+          longitude     FLOAT64,
+          sensor_name   STRING,
+          unit          STRING,
+          value         FLOAT64
+      ) 
+      OPTIONS (
+              format = 'CSV',
+              uris = ['{{render(vars.gcs_file_path)}}'],
+              compression = 'GZIP',
+              skip_leading_rows = 1,
+              ignore_unknown_values = TRUE
+      );
+
+variables:
+  gcs_file_path: "gs://{{secret('GCP_BUCKET_NAME')}}/historical_data/*.csv.gz"
+  table: "{{secret('GCP_DATASET')}}.ext_historical_source_data"  
+
+# To avoid repeating task properties on multiple occurrences of the same task in a pluginDefaults properties
+pluginDefaults:
+ - type: io.kestra.plugin.gcp
+   values:
+      serviceAccount: "{{secret('GCP_SERVICE_ACCOUNT')}}"
+      projectId: "{{secret('GCP_PROJECT_ID')}}"
+      location: "{{secret('GCP_LOCATION')}}"
+      bucket: "{{secret('GCP_BUCKET_NAME')}}"
+      dataset: "{{secret('GCP_DATASET')}}"
+     
