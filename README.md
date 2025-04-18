@@ -78,7 +78,7 @@ To address this gap, I designed and implemented a state-specific, smart air qual
 
  ### Architecture and interplay of these components for running the pipeline with batch-porcessing ###
 
-   ![alt text](images/dez-proj-architecture.drawio.png)
+   ![alt text](images/dez-proj-architecture.png)
 
 
  ### Project Structure ###
@@ -143,7 +143,7 @@ To address this gap, I designed and implemented a state-specific, smart air qual
 
 ##  📈 Analytics Dashboard ##
 
-- Plan for the analytics dashboards in view the fact table models created 
+ 🔆 Plan for the analytics dashboards in view the fact table models created 
 
    ⤴️ fct_current_hourly ➔➔➔ Concentration value of all pollutants [PM10, PM2.5, 03, NO2, NO, SO2, CO] currently at the selected location (9 locations)
 
@@ -153,7 +153,7 @@ To address this gap, I designed and implemented a state-specific, smart air qual
 
    Out of the 3, as submission deadline is less than an hour away, I could create only 1 tile , i.e. the temporal location-wise one _which shows the daily average concentration of pollutants in µg/m³ for each of the measured location_
 
-    ![alt text](images/dashboard-1.png)     
+   ![alt text](images/dashboard-1.png)     
 
-    The dashboard can be acccesed [here](https://lookerstudio.google.com/reporting/906f6c45-bee4-44a1-91ef-b5c25172b12e/page/mxTHF)
+   The dashboard can be acccesed [here](https://lookerstudio.google.com/reporting/906f6c45-bee4-44a1-91ef-b5c25172b12e/page/mxTHF)
 
