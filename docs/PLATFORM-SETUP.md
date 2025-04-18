@@ -8,15 +8,15 @@
 
  3. You shall land in the Project Creation Page where you need to input a Project Name and create the project. I put  __dez-capstone-project1__ as the project name.
 
-  ![alt text](images/setup/image-1.png)
+  ![alt text](../images/setup/image-1.png)
 
  4. After the project is created, you shall land in the Dashboard for that project.
 
-  ![alt text](images/setup/image-2.png)
+  ![alt text](../images/setup/image-2.png)
 
  5. Now proceed to create a service account under this project. From the side menu, go to __IAM & Admin__ --> __Service Accounts__ --> __Create Service Account__.
 
-  ![alt text](images/setup/image-3.png)
+  ![alt text](../images/setup/image-3.png)
 
  6. I had put __capstone-project1-service-account__ as the Service account name and __cap-proj1-svc-acct__ as the Service account ID. Subsequently, we need to grant the following roles to it:
  -  BigQuery Admin			
@@ -29,24 +29,24 @@
  -  Storage Admin
  -  Storage Object Admin
 
-  ![alt text](images/setup/image-4.png)
+  ![alt text](../images/setup/image-4.png)
 
   7. After creation of the service account with the required roles, we need to generate the service account keys which __dbt__ and __Terraform__ shall use for integration with __BigQuery__ and  __GCS Bucket__ Under the listed service account go to __Actions__ and select __Manage keys__ from there.
 
-  ![alt text](images/setup/image-5.png)
+  ![alt text](../images/setup/image-5.png)
 
    In the page that comes up, select __Create new key__ from the __Add key__ dropdown. Select the option for __JSON__ and click on __Create__ The private key in JSON format will be generated and downloaded to your local machine. 
     
-   |                                         |                                         |
-   |----------------------------------------|-----------------------------------------|
-   |  ![alt text](images/setup/image-6.png)  | ![alt text](images/setup/image-7.png)   |
+   |                                            |                                           |
+   |--------------------------------------------|-------------------------------------------|
+   |  ![alt text](../images/setup/image-6.png)  | ![alt text](../images/setup/image-7.png)  |
 
    
   8. Finally, go to  APIs & Services--->API Library. There on the search box search for __Cloud Resource Manager API__ and go to that page and enable the API
 
-   |                                         |                                         |
-   |---------------------------------------- | --------------------------------------- |
-   |  ![alt text](images/setup/image-11.png) | ![alt text](images/setup/image-12.png)  |
+   |                                            |                                            |
+   |------------------------------------------- | ------------------------------------------ |
+   |  ![alt text](../images/setup/image-11.png) | ![alt text](../images/setup/image-12.png)  |
 
 
 
@@ -70,7 +70,7 @@
 
  5. For simplicity of relative filepath for Terraform, copy this public key from the __~/.shh__ directory to the __.secrets__ directory under this project directory.
 
- 6. Accordingly, the [__main.tf__](terraform/main.tf) and [__variables.tf__ ](terraform/variables.tf) needs to be scripted.
+ 6. Accordingly, the [__main.tf__](../terraform/main.tf) and [__variables.tf__ ](../terraform/variables.tf) needs to be scripted.
 
  7. Then go inside the terraform directory and initialize terraform
  
@@ -79,15 +79,15 @@
         terraform init 
    
 
-   ![alt text](images/setup/image-8.png)
+   ![alt text](../images/setup/image-8.png)
 
  8. After successfull initialization, with __terraform plan__ you can preview a report of what actions Terraform will take when you run __terraform apply__ . Also if any issues are there in your __main.tf__ or __variables.tf__ that can cause error, terraform plan shall let you know beforehand. You can also save this plan with 
 
         terraform plan -out=tfplan
   
-   |                                         |                                         |
-   |-----------------------------------------|-----------------------------------------|
-   | ![alt text](images/setup/image-9.png)   | ![alt text](images/setup/image-10.png)  |
+   |                                            |                                            |
+   |--------------------------------------------|--------------------------------------------|
+   | ![alt text](../images/setup/image-9.png)   | ![alt text](../images/setup/image-10.png)  |
 
  9. Since the plan for the infrastructure with Terrafoem is already reviewed and saved to tfplan, we can run
 
@@ -95,19 +95,19 @@
 
  10. Terraform successfully carries out the plan.
 
-   ![alt text](images/setup/image-13.png)
+   ![alt text](../images/setup/image-13.png)
 
  11. Now let us check the ceeated resources
   
-   |                                         |                                         |
-   |-----------------------------------------|-----------------------------------------|
-   | ![alt text](images/setup/image-21.png)  | ![alt text](images/setup/image-22.png)  |
+   |                                            |                                            |
+   |--------------------------------------------|--------------------------------------------|
+   | ![alt text](../images/setup/image-21.png)  | ![alt text](../images/setup/image-22.png)  |
 
 
 
-   |                                         |                                         |
-   |-----------------------------------------|-----------------------------------------|
-   | ![alt text](images/setup/image-19.png)  | ![alt text](images/setup/image-20.png)  |
+   |                                            |                                            |
+   |--------------------------------------------|--------------------------------------------|
+   | ![alt text](../images/setup/image-19.png)  | ![alt text](../images/setup/image-20.png)  |
 
 
 
@@ -133,9 +133,9 @@
 
          ssh dez-capstone-project-vm
         
-   |                                         |                                         |                                        |
-   |-----------------------------------------|-----------------------------------------|----------------------------------------|
-   | ![alt text](images/setup/image-14.png)  | ![alt text](images/setup/image-15.png)  | ![alt text](images/setup/image-16.png) |
+   |                                            |                                            |                                           |
+   |--------------------------------------------|--------------------------------------------|-------------------------------------------|
+   | ![alt text](../images/setup/image-14.png)  | ![alt text](../images/setup/image-15.png)  | ![alt text](../images/setup/image-16.png) |
 
   
    4. Now you need to set up the environment and configuration of the VM. Start with :
@@ -189,7 +189,7 @@
           source .bashrc
 
 
-## There is a [video by Alexey](https://youtu.be/ae-CV2KfoN0?si=uSpBat_dUobrSR5r) which can also be very helpful in carrying out the tasks defined in this document till now. ##
+## There is a [video by our coach Alexey](https://youtu.be/ae-CV2KfoN0?si=uSpBat_dUobrSR5r) which can also be very helpful in carrying out the tasks defined in this document till now. ##
 
 
   
