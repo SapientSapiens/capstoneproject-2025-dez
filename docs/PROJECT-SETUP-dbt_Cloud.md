@@ -38,3 +38,28 @@
     |                                                   |                                                 |
     |---------------------------------------------------|-------------------------------------------------|
     | ![alt text](/images/project-setup/image-i1.png)   | ![alt text](/images/project-setup/image-i2.png) |
+
+
+
+ 4. After setting up the dbt Cloud environment, development ensued. The dbt mmodels have been successfully built and resulting tables in the BigQuery dataset.
+
+     
+
+    |                                                   |                                                              |
+    |---------------------------------------------------|--------------------------------------------------------------|
+    | ![alt text](/images/project-setup/dbt-build.png)  | ![alt text](/images/project-setup/bq-dataset-dbt-build.png)  |
+
+
+ 5. After successfull build, the dbt project needs to be deployed at dbt Cloud in a Production Environment. We create a new environment __Production__. Sunsequently we  create Job named __kestra_trigger_job__. But before running the manually, with scheduler or with API trigger, we need to create a dataset in BigQuery which we specified during the Production environment creation. In my case, it is __prod_air_quality_assam_dataset__ in the same location (_us-central-1_ in my case)
+
+ 6. For certainity of seamless operations, I tried a manual run and it was successful resulting in the population of the production dataset with requisite tables and views.
+
+    |                                                        |                                                                        |
+    |--------------------------------------------------------|------------------------------------------------------------------------|
+    | ![alt text](/images/project-setup/dbt-prod-build.png)  | ![alt text](/images/project-setup/prod-dataset-dbt-populate.png)       |
+  
+   
+  
+   
+
+

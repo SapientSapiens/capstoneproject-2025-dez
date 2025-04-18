@@ -93,7 +93,7 @@ variables:
   gcs_file: "gs://{{secret('GCP_BUCKET_NAME')}}/hourly_data/{{vars.file}}"
   table: "{{secret('GCP_DATASET')}}.ext_hourly_source_data"  
 
-# Trigger scheduled for running this flow every hour at the 40th minute.
+# Trigger scheduled for running this flow every hour at the 40th minute. (but since GCP platform and VM in us-central-1 location, where Kestra is hosted, it is 10th minute as per Indian Standard Time because of thee time difference )
 triggers:
   - id: hourly
     type: io.kestra.plugin.core.trigger.Schedule
