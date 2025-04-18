@@ -88,6 +88,8 @@ WITH
   )
 
 SELECT
-  *
+  location, 
+  aqi_description AS air_quality,
+  dominant_pollutant
 FROM final_output
 ORDER BY location

@@ -1,0 +1,12 @@
+# ignore secrets, virtual environments and typical python compilation artifacts
+
+# ignore basic python artifacts
+
+**/__pycache__/
+**/*.py[cod]
+**/*$py.class
+# ignore duckdb
+*.duckdb
+*.wal.terraform/
+.terraform/
+.secrets/

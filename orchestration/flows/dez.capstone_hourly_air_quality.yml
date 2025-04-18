@@ -1,0 +1,100 @@
+id: hourly_air_quality
+namespace: dez.capstone
+
+# This task gets the required access to the needed files under various directories of my project directory
+tasks:
+  - id: kestra_namespace_files_sync
+    type: io.kestra.plugin.scripts.shell.Commands
+    taskRunner:
+      type: io.kestra.plugin.core.runner.Process
+    commands:
+      - /app/kestra namespace files update dez.capstone /app/dlt . --server=http://localhost:8080 --user=admin@kestra.io:{{secret('KESTRA_PASSWORD')}}
+      - /app/kestra namespace files update dez.capstone /app/.secrets . --server=http://localhost:8080 --user=admin@kestra.io:{{secret('KESTRA_PASSWORD')}}
+     
+
+  # This task runs the dlt pipeline to fetch air-quality data for the desired locations and dumps in a file to a GCS bucket.  
+  - id: run_dlt_pipeline
+    type: io.kestra.plugin.scripts.python.Commands
+    containerImage: python:3.12-slim
+    namespaceFiles:
+      enabled: true
+    beforeCommands:
+      - pip install dlt[filesystem]==1.8.1 gcsfs==2025.3.2 kestra
+    commands:
+      - python hourly_readings_ingestion.py
+  
+  
+  # Fetch logs of the above task
+  - id: fetch_logs
+    type: io.kestra.plugin.core.log.Fetch
+    level: INFO
+    executionId: "{{ execution.id }}"
+    tasksId:
+      - run_dlt_pipeline
+
+
+  # Extract the timestamp from the previous task's output
+  - id: extract_timestamp_from_logs
+    type: io.kestra.plugin.scripts.python.Script
+    containerImage: python:3.12-slim
+    beforeCommands:
+    - pip install kestra
+    inputFiles:
+      logs.ion: "{{ outputs.fetch_logs.uri }}"
+    script: |
+      import re
+      with open("logs.ion", "r") as f:
+          log_text = f.read()
+      match = re.search(r"ran successfully at (\d{4}-\d{2}-\d{2}_\d{2}-\d{2}-\d{2})", log_text)
+      if match:
+          timestamp = match.group(1)
+          print(f"The found timestamp is {timestamp}")
+      else:
+          timestamp = "not_found"
+      from kestra import Kestra
+      Kestra.outputs({"timestamp": timestamp})
+
+
+  # Task to create BigQuery external table for loading data
+  - id: bq_hourly_table_ext
+    type: io.kestra.plugin.gcp.bigquery.Query
+    sql: |
+      CREATE OR REPLACE EXTERNAL TABLE `{{secret('GCP_PROJECT_ID')}}.{{render(vars.table)}}`
+      (
+          dateandtime   STRING,
+          location_id   STRING,
+          location_name STRING,
+          sensor_id     STRING,
+          sensor_name   STRING,
+          value         FLOAT64,
+          unit          STRING,
+          dlt_load_id   STRING,
+          dlt_id        STRING
+      ) 
+      OPTIONS (
+              format = 'CSV',
+              uris = ['{{render(vars.gcs_file)}}'],
+              skip_leading_rows = 1,
+              ignore_unknown_values = TRUE
+      );
+
+# To avoid repeating task properties on multiple occurrences of the same task in a pluginDefaults properties
+pluginDefaults:
+ - type: io.kestra.plugin.gcp
+   values:
+      serviceAccount: "{{secret('GCP_SERVICE_ACCOUNT')}}"
+      projectId: "{{secret('GCP_PROJECT_ID')}}"
+      location: "{{secret('GCP_LOCATION')}}"
+      bucket: "{{secret('GCP_BUCKET_NAME')}}"
+      dataset: "{{secret('GCP_DATASET')}}"
+
+variables:
+  file: "latest_measurements_{{ outputs.extract_timestamp_from_logs.vars.timestamp}}.csv"
+  gcs_file: "gs://{{secret('GCP_BUCKET_NAME')}}/hourly_data/{{vars.file}}"
+  table: "{{secret('GCP_DATASET')}}.ext_hourly_source_data"  
+
+# Trigger scheduled for running this flow every hour at the 40th minute.
+triggers:
+  - id: hourly
+    type: io.kestra.plugin.core.trigger.Schedule
+    cron: "40 * * * *"
