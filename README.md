@@ -82,13 +82,11 @@ To address this gap, I designed and implemented a state-specific, smart air qual
 
 
  ### Project Structure ###
-
         
    
-
    |                                            |                                            |
    |--------------------------------------------|--------------------------------------------|
-   |![alt text](images/proj-struct.png)         | ![alt text](images/struct-pr.png)      |
+   |![alt text](images/proj-struct.png)         | ![alt text](images/struct-pr.png)          |
 
 
 
@@ -140,5 +138,21 @@ To address this gap, I designed and implemented a state-specific, smart air qual
    |                                                |                                            |
    |------------------------------------------------|--------------------------------------------|
    |  ![alt text](images/api-trigger-success.png)   | ![alt text](images/asli-DAG.png)           |
+
+
+
+##  📈 Analytics Dashboard ##
+
+- Plan for the analytics dashboards in view the fact table models created 
+
+   ⤴️ fct_current_hourly ➔➔➔ Concentration value of all pollutants [PM10, PM2.5, 03, NO2, NO, SO2, CO] currently at the selected location (9 locations)
+
+   ⤴️ fct_aqi_data ➔➔➔ Pie chart categorisation of air quality [Good, Satisfacatory, Moderate, Poor, Very Poor, Severe] among the 9 locations
+
+   ⤴️ fct_temporal_locationwise ➔➔➔  Daily average of each pollutant from a selected location across a timeline from Feb 2025 (installation date of the sensors)
+
+   Out of the 3, as submission deadline is less than an hour away, I could create only 1 tile , i.e. the temporal location-wise one _which shows the daily average concentration of pollutants in µg/m³ for each of the measured location_
+
+    ![alt text](images/dashboard-1.png)     
 
 
