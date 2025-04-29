@@ -53,7 +53,7 @@ models:
              values: ['CO', 'NO', 'NO2', 'SO2', 'O3', 'PM2.5', 'PM25', 'PM10'] # PM2.5 is coming as PM25 sometimes from source
 
 
-  - name: fct_AQI_data
+  - name: fct_aqi_data
     description: Calculated AQI values per location-day
     columns:
      - name: aqi
@@ -67,7 +67,7 @@ models:
             values: ['Good', 'Satisfactory', 'Moderate', 'Poor', 'Very Poor', 'Severe']
 
 
-  - name: fct_temporal_location
+  - name: fct_temporal_locationwise
     description: "Daily pollutant concentration per sensor and location"
     columns:
       - name: unique_record_id
