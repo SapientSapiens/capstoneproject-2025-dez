@@ -55,7 +55,8 @@ def get_location_info():
         response = client.get(f"locations/{loc_id}")
         response.raise_for_status()  # USseful for explicit error checking
         yield response.json()
-        time.sleep(1)
+        time.sleep(1) # Avoid API rate limits
+
 
 @dlt.resource(
     table_name="latest_airquality_measurements",
@@ -69,8 +70,9 @@ def get_latest_info():
         response = client.get(f"locations/{loc_id}/latest")
         response.raise_for_status()
         yield response.json()
-        time.sleep(1)
-        
+        time.sleep(1) # Avoid API rate limits
+
+
 @dlt.transformer(columns=[{"name": "timestamp", "data_type": "text"}])
 def latest_measurements(latest_readings):
     # Using the location info
@@ -95,7 +97,7 @@ def latest_measurements(latest_readings):
                 "location_name": loc_name,
             }
 
-    # Use the latest_readings passed into the transformer. This is also based on the structure of the response from the API.
+    # Use the latest_readings passed into the transformer. For each sensor reading in latest_readings["results"], yield a flattened record
     for reading in latest_readings["results"]:
         key = (reading.get("locationsId"), reading.get("sensorsId"))
         sensor_info = sensor_map.get(key, {"name": "UNKNOWN", "unit": "unknown", "location_name": "unknown"})
@@ -109,6 +111,7 @@ def latest_measurements(latest_readings):
             "unit": sensor_info.get("unit")
         }
 
+
 # create a pipeline
 pipeline = dlt.pipeline(
     pipeline_name="source_to_gcs_dlt_pipeline",
@@ -121,6 +124,7 @@ pipeline = dlt.pipeline(
     dataset_name="hourly_data",
 )
 
+
 def run_pipeline():
     try:
         # Run the pipeline with latest_measurements resource through the transformer.
@@ -129,6 +133,7 @@ def run_pipeline():
         #logging.info(f"dlt pipeline for hourly data ingestion ran successfully at {current_ist_timestamp} with message {load_info}")  
     except Exception as e:
         logger.error(f"Error running dlt pipeline : {e}")
+
 
 if __name__ == "__main__":
     run_pipeline()
