@@ -1,6 +1,6 @@
 # Air Quality Analysis Data Pipeline #
 
-![alt text](/images/cover-pic.png)
+![alt text](images/cover-pic.png)
 
 
 
