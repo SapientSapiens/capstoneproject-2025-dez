@@ -100,7 +100,7 @@ To address this gap, I designed and implemented a state-specific, smart air qual
  ### Architecture and interplay of these components for running this ELT data pipeline with batch-processing ###
 
 
-   ![alt text](images/project-architechture-dark.png)
+   ![alt text](images/project-architechture-light.png)
 
 
 
