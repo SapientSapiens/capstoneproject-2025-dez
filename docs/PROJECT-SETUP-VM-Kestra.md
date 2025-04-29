@@ -80,8 +80,11 @@
 
 
 
- 12. The final part or task of the scheduled flow, i.e.,  __hourly_air_quality__  is to run the data transformation in the BigQuery dataset with dbt Cloud via the API trigger. The flow is executing sucessfully.
-
+ #### 12. The final part or task of the scheduled flow, i.e.,  __hourly_air_quality__  is to run the data transformation in the BigQuery dataset with dbt Cloud via the API trigger. The flow is executing sucessfully. 
 
   
    ![alt text](/images/project-setup/gantt-api-dbt.png)
+
+
+
+ 13. Please cross reference with [__this__](/docs/PROJECT-SETUP-dbt_Cloud.md#8-after-setting-up-the-trigger-in-the-orcehstrration-tool-kestra-when-the-flow-is-executed-we-can-see-the-job-is-running-triggered-via-the-api-from-one-of-the-tasks-in-the-orchestration-flow) for more clarity.
