@@ -56,15 +56,15 @@ models:
   - name: fct_aqi_data
     description: Calculated AQI values per location-day
     columns:
-     - name: aqi
+     - name: dominant_pollutant
        tests:
         - not_null
         - accepted_values:
-            values: [1, 2, 3, 4, 5, 6]
-     - name: aqi_description
+            values: [ 'PM2.5', 'PM25', 'PM10', 'NO2', 'SO2']
+     - name: air_quality
        tests:
         - accepted_values:
-            values: ['Good', 'Satisfactory', 'Moderate', 'Poor', 'Very Poor', 'Severe']
+            values: ['Good', 'Satisfactory', 'Moderate', 'Poor', 'Very Poor', 'Severe', 'EMPTY']
 
 
   - name: fct_temporal_locationwise
