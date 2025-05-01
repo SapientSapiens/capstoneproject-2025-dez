@@ -203,19 +203,19 @@ To address this gap, I designed and implemented a state-specific, smart air qual
 
 
 
- ### 🔗  __The online dashboard can be acccesed [__here__](https://lookerstudio.google.com/reporting/906f6c45-bee4-44a1-91ef-b5c25172b12e/page/mxTHF)__ [will be live till 5th May 2025]
+ ### 🔗 The online dashboard can be acccesed [__here__](https://lookerstudio.google.com/reporting/906f6c45-bee4-44a1-91ef-b5c25172b12e/page/mxTHF) [will be live till 5th May 2025]
 
  ### 📋🖼️ The captured images of the views of the Analytical Reports can be found [__here__](/docs/Analytical-Reports-public-view.md)
 
 
-## Future Plan ##
+## 🌟🤖 Future Plan ##
 
- ### Introduce schema evolution mechanism into the data extraction and ingestion part (hourly) for resilience of the pipeline. ###
+ #### Introduce schema evolution mechanism into the data extraction and ingestion part (hourly) for resilience of the pipeline. ####
 
- ### If I get access to the health data, preferably the data from the Public Health Centres (PHC) in and around the areas where the sensors are placed, I plan to examine correlation between diseases (especially respiratory) with the levels of pollutants for that location in the same temporal segment. ###
+ #### If I get access to the health data, preferably the data from the Public Health Centres (PHC) in and around the areas where the sensors are placed, I plan to examine correlation between diseases (especially respiratory) with the levels of pollutants for that location in the same temporal segment. ####
 
- ### Any collaboration in that regard from anyone is most welcome  ###
+ #### Any collaboration in that regard from anyone is most welcome  ####
 
 
-## Pull requests are also welcome for the current repo and please feel free to connect with me at my [__LinkedIn__](https://www.linkedin.com/in/siddhartha-gogoi) profile.
+## 🤝 Pull requests are also welcome for the current repo and please feel free to connect with me at my [__LinkedIn__](https://www.linkedin.com/in/siddhartha-gogoi) profile.
 
