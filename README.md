@@ -217,5 +217,5 @@ To address this gap, I designed and implemented a state-specific, smart air qual
  #### Any collaboration in that regard from anyone is most welcome  ####
 
 
-## 🤝 Pull requests are also welcome for the current repo and please feel free to connect with me at my [__LinkedIn__](https://www.linkedin.com/in/siddhartha-gogoi) profile.
+### 🤝 Pull requests are also welcome for the current repo and please feel free to connect with me at my [__LinkedIn__](https://www.linkedin.com/in/siddhartha-gogoi) profile. ###
 
